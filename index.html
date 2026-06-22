@@ -2,19 +2,38 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>بازی کسب درآمد</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dabernabaz Luxury</title>
+    <style>
+        body { margin: 0; background-color: #0a0a0a; color: #ffd700; font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .game-card { width: 90%; max-width: 400px; background: linear-gradient(145deg, #1c1c1c, #0d0d0d); padding: 30px; border-radius: 20px; border: 2px solid #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); text-align: center; }
+        .balance-box { font-size: 24px; font-weight: bold; margin-bottom: 30px; color: #fff; }
+        .btn { width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; transition: 0.3s; }
+        .btn-start { background: #ffd700; color: #000; }
+        .btn-charge { background: #333; color: #ffd700; border: 1px solid #ffd700; }
+        .btn:active { transform: scale(0.95); }
+    </style>
 </head>
 <body>
-    <div class="app-container">
-        <header class="app-header">
-            <div>موجودی: <span id="balance">۲,۷۵۰</span> تومان</div>
-            <button onclick="window.location.href='#'">شارژ حساب</button>
-        </header>
-        <main class="game-section">
-            <button class="btn-start" onclick="startGame()">شروع بازی</button>
-        </main>
-    </div>
-    <script src="script.js"></script>
+
+<div class="game-card">
+    <div class="balance-box">موجودی: <span id="balance">۲,۷۵۰</span> تومان</div>
+    <button class="btn btn-start" onclick="playGame()">شروع بازی (۵۰۰ تومان)</button>
+    <button class="btn btn-charge" onclick="window.location.href='#'">شارژ حساب</button>
+</div>
+
+<script>
+    let balance = 2750;
+    function playGame() {
+        if (balance >= 500) {
+            balance -= 500;
+            document.getElementById('balance').innerText = balance.toLocaleString();
+            alert("بازی شروع شد! موفق باشید ارباب.");
+        } else {
+            alert("موجودی کافی نیست! لطفا حساب خود را شارژ کنید.");
+        }
+    }
+</script>
+
 </body>
 </html>

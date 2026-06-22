@@ -2,631 +2,206 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دبرنا باز - VIP Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>پارس دبرنا - تالار VIP</title>
     <style>
-        /* تعریف فونت و متغیرهای رنگی لوکس */
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800;900&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap');
+
         :root {
-            --primary-gold: linear-gradient(135deg, #ffe0a3 0%, #d4af37 50%, #8c6d1d 100%);
-            --gold-glow: 0 0 15px rgba(212, 175, 55, 0.5);
-            --dark-bg: radial-gradient(circle at center, #1c0508 0%, #0c0203 100%);
-            --glass-card: rgba(25, 10, 12, 0.75);
-            --neon-red: #ff3344;
+            --gold: linear-gradient(180deg, #ffe0a3 0%, #d4af37 50%, #8c6d1d 100%);
+            --red-panel: linear-gradient(180deg, #a01a1a 0%, #600505 100%);
+            --shadow: 0 10px 20px rgba(0,0,0,0.7);
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Vazirmatn', sans-serif;
-            -webkit-tap-highlight-color: transparent;
+        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: #0c0203; color: #fff; overflow-x: hidden;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--dark-bg);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* پس‌زمینه اختصاصی کازینویی با کارت‌های دبرنا */
+        .main-wrapper {
+            position: relative;
+            width: 100%;
             min-height: 100vh;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* افکت ذرات طلایی معلق در پس‌زمینه */
-        #particle-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(255,224,163,0.8) 0%, rgba(212,175,55,0) 70%);
-            border-radius: 50%;
-            animation: floatUp linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(100vh) scale(0.3); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-
-        /* کانتینر اصلی اپلیکیشن */
-        .app-container {
-            width: 100%;
-            max-width: 420px;
-            height: 100vh;
-            max-height: 850px;
-            background: rgba(12, 2, 3, 0.95);
-            border: 2px solid #3d2712;
-            border-radius: 30px;
-            position: relative;
-            z-index: 2;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), 
+                        url('https://img.freepik.com/premium-photo/luxury-casino-interior-with-bingo-cards-balls-table_1025550-1254.jpg');
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
+            padding: 15px;
         }
 
-        /* ------------------ صفحه ورود مدرن ------------------ */
-        .auth-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 25px;
-            text-align: center;
-            z-index: 5;
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .brand-logo-glow {
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, #1f0406 0%, #050000 100%);
+        /* --- هدر پروفایل (دقیقاً مشابه عکس) --- */
+        .profile-header {
+            width: 100%;
+            background: var(--red-panel);
             border: 3px solid #d4af37;
-            border-radius: 30px;
+            border-radius: 25px;
+            padding: 10px 15px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-size: 50px;
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25), inset 0 0 15px rgba(212,175,55,0.2);
-            margin-bottom: 25px;
-            transform: rotate(45deg);
-        }
-        .brand-logo-glow span {
-            transform: rotate(-45deg);
-        }
-
-        .auth-title {
-            font-size: 28px;
-            font-weight: 900;
-            background: var(--primary-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-        }
-
-        .auth-subtitle {
-            font-size: 13px;
-            color: #bfa1a5;
-            margin-bottom: 35px;
-            line-height: 1.6;
-        }
-
-        .modern-input-group {
-            width: 100%;
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .modern-input {
-            width: 100%;
-            padding: 18px 25px;
-            border-radius: 16px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            background: rgba(255, 255, 255, 0.03);
-            color: #fff;
-            font-size: 15px;
-            text-align: center;
-            outline: none;
-            transition: all 0.3s;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .modern-input:focus {
-            border-color: #d4af37;
-            background: rgba(255, 255, 255, 0.06);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15), inset 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .btn-luxury-action {
-            width: 100%;
-            padding: 16px;
-            border-radius: 16px;
-            border: none;
-            background: var(--primary-gold);
-            color: #140d02;
-            font-size: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-luxury-action::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: skewX(-25deg);
-            transition: none;
-        }
-
-        .btn-luxury-action:hover::before {
-            left: 150%;
-            transition: all 0.6s ease;
-        }
-
-        .btn-luxury-action:active {
-            transform: scale(0.98);
-        }
-
-        /* ------------------ داشبورد اصلی و متمایز ------------------ */
-        .dashboard-panel {
-            display: none;
-            flex-direction: column;
-            height: 100%;
-            padding: 20px;
             justify-content: space-between;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        /* هدر آوانگارد و لاکچری */
-        .luxury-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(180deg, rgba(30,12,15,0.9) 0%, rgba(15,5,7,0.9) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 20px;
-            padding: 12px 16px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-
-        .user-profile-widget {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .avatar-ring {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #d4af37, #ff3344);
-            padding: 2px;
-            box-shadow: 0 0 10px rgba(255, 51, 68, 0.3);
-        }
-
-        .avatar-inner {
-            width: 100%;
-            height: 100%;
-            background: #150507;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-        }
-
-        .user-text-info {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .user-title {
-            font-size: 14px;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .user-status-tag {
-            font-size: 10px;
-            color: #d4af37;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: #4caf50;
-            border-radius: 50%;
-            box-shadow: 0 0 6px #4caf50;
-        }
-
-        /* ویجت کیف پول دیجیتال */
-        .digital-wallet {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 8px 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .wallet-amount {
-            font-size: 16px;
-            font-weight: 900;
-            color: #d4af37;
-            text-shadow: 0 2px 5px rgba(212,175,55,0.3);
-        }
-
-        /* نمایشگر شیک تعداد بازیکنان آنلاین */
-        .online-counter-badge {
-            align-self: center;
-            background: rgba(255, 51, 68, 0.1);
-            border: 1px solid rgba(255, 51, 68, 0.3);
-            border-radius: 30px;
-            padding: 6px 16px;
-            font-size: 11px;
-            font-weight: 500;
-            color: #ff808b;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 4px 10px rgba(255, 51, 68, 0.1);
-            margin: 15px 0;
-        }
-
-        /* گرید شش‌گانه خلاقانه (طراحی مدرن کارت‌ها با شیب ملایم) */
-        .creative-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
+            box-shadow: var(--shadow), inset 0 0 15px rgba(212,175,55,0.3);
             margin-bottom: 20px;
-        }
-
-        .luxury-card {
-            background: linear-gradient(145deg, #1b0a0d 0%, #0d0304 100%);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 18px;
-            padding: 18px 12px;
-            text-align: center;
-            cursor: pointer;
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
         }
 
-        .luxury-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: transparent;
-            transition: all 0.3s;
+        .user-info { display: flex; align-items: center; gap: 12px; }
+        .avatar-box {
+            width: 65px; height: 65px;
+            background: #4a0707; border: 2px solid #d4af37;
+            border-radius: 15px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; font-size: 10px;
+        }
+        .avatar-box span { font-size: 30px; }
+
+        .user-details b { font-size: 18px; color: #fff; display: block; }
+        
+        .balance-box {
+            background: rgba(0,0,0,0.4); border: 2px solid #d4af37;
+            border-radius: 12px; padding: 5px 15px; display: flex;
+            align-items: center; gap: 8px; color: #fff; font-weight: 900;
         }
 
-        .luxury-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
+        /* --- لوگوی وسط --- */
+        .center-logo {
+            width: 90px; height: 90px;
+            margin: 0 auto 20px auto;
+            background: url('https://i.postimg.cc/8P8t6t2P/paris-logo.png') no-repeat center center/contain;
+            filter: drop-shadow(0 0 10px #d4af37);
         }
 
-        .luxury-card:hover::before {
-            background: var(--primary-gold);
+        /* --- منوی دکمه‌های پیکانی (دو ستونه) --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 10px;
+            margin-bottom: 30px;
         }
 
-        .luxury-card:active {
-            transform: scale(0.96);
-        }
-
-        .card-icon {
-            font-size: 26px;
-            background: var(--primary-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 2px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-        }
-
-        .card-title {
-            font-size: 13px;
-            font-weight: 800;
-            color: #f5e4c3;
-        }
-
-        .card-desc {
-            font-size: 9px;
-            color: #7d6b6e;
-        }
-
-        /* دکمه سه بعدی و طلایی عظیم "شروع بازی" */
-        .primary-trigger-area {
+        .arrow-btn {
             position: relative;
-            margin-bottom: 10px;
-        }
-
-        .glow-button-effect {
-            position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
-            background: var(--primary-gold);
-            border-radius: 24px;
-            filter: blur(12px);
-            opacity: 0.4;
-            animation: breathe 3s infinite alternate;
-        }
-
-        .btn-launch-game {
-            width: 100%;
-            background: linear-gradient(135deg, #240a0e 0%, #0d0102 100%);
+            height: 55px;
+            background: linear-gradient(90deg, #bd1d1d 0%, #7a0a0a 100%);
             border: 2px solid #d4af37;
-            border-radius: 20px;
-            color: #fff;
-            padding: 20px;
-            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 900;
+            font-size: 15px;
+            color: #fff;
             cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: 0.2s;
+        }
+
+        /* حالت پیکانی (Arrow Shape) */
+        .arrow-left { border-radius: 40px 5px 5px 40px; border-right: none; }
+        .arrow-right { border-radius: 5px 40px 40px 5px; border-left: none; }
+
+        .arrow-btn:active { transform: scale(0.95); filter: brightness(1.2); }
+
+        /* --- دکمه عظیم شروع بازی --- */
+        .start-game-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: auto;
+            padding-bottom: 20px;
+        }
+
+        .main-trigger {
+            width: 100%;
+            max-width: 320px;
+            height: 100px;
+            background: var(--red-panel);
+            border: 4px solid #d4af37;
+            border-radius: 100px;
             position: relative;
             z-index: 2;
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 12px;
-            box-shadow: inset 0 0 15px rgba(212,175,55,0.2), 0 8px 20px rgba(0,0,0,0.6);
-            transition: all 0.3s;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8);
         }
 
-        .btn-launch-game span.gold-text {
-            background: var(--primary-gold);
+        .main-trigger span {
+            font-size: 32px;
+            font-weight: 900;
+            background: var(--gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .btn-launch-game:active {
-            transform: scale(0.97);
+        .laurel-wreath {
+            position: absolute;
+            width: 110%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            top: 50%; transform: translateY(-50%);
+        }
+        .leaf { width: 60px; height: 80px; background: url('https://cdn-icons-png.flaticon.com/512/2619/2619247.png') no-repeat center center/contain; filter: sepia(1) saturate(5) brightness(0.8); }
+        .leaf.right { transform: scaleX(-1); }
+
+        /* --- فوتر (میز دبرنا) --- */
+        .table-footer {
+            width: 100%;
+            height: 180px;
+            background: url('https://i.postimg.cc/mD8zYv8N/table-cards.png') no-repeat center bottom/cover;
+            margin-top: -40px;
         }
 
-        /* انیمیشن‌ها */
-        @keyframes breathe {
-            0% { opacity: 0.3; transform: scale(0.98); }
-            100% { opacity: 0.6; transform: scale(1.02); }
-        }
-
-        /* ریسپانسیو عالی */
-        @media (max-height: 700px) {
-            .app-container { border-radius: 0; max-height: 100vh; }
-            .brand-logo-glow { width: 85px; height: 85px; font-size: 40px; margin-bottom: 15px; }
-            .auth-title { font-size: 24px; }
-            .auth-subtitle { margin-bottom: 20px; }
-            .luxury-card { padding: 12px 8px; }
-            .btn-launch-game { padding: 15px; font-size: 18px; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- افکت ذرات طلایی شناور در پس‌زمینه کل صفحه -->
-    <div id="particle-container"></div>
-
-    <div class="app-container">
-
-        <!-- ================= صفحه ورود (مستقل و خلاقانه) ================= -->
-        <div class="auth-panel" id="authScreen">
-            <div class="brand-logo-glow">
-                <span>⚜️</span>
+    <div class="main-wrapper" id="appBody">
+        
+        <!-- هدر پروفایل کاربر -->
+        <div class="profile-header">
+            <div class="user-info">
+                <div class="avatar-box">
+                    <span>👤</span
+                    <b>پروفایل</b>
+                </div>
+                <div class="user-details">
+                    <b id="displayUser">meisamnadiri</b>
+                </div>
             </div>
-            <div class="auth-title">تـالار مجـلل دبرنـا</div>
-            <div class="auth-subtitle">به دنیای رقابت‌های آنلاین و جوایز میلیونی خوش آمدید.<br>برای شروع، نام کاربری اختصاصی خود را وارد کنید.</div>
-            
-            <div class="modern-input-group">
-                <input type="text" class="modern-input" id="usernameInput" placeholder="یک نام کاربری خاص بنویسید..." autocomplete="off">
+            <div class="balance-box">
+                <span style="font-size: 20px;">💵</span>
+                <span id="balance">۱۳۱,۰۰۰</span>
             </div>
-            
-            <button class="btn-luxury-action" onclick="enterVIPHall()">ساخت حساب و ورود به تالار</button>
         </div>
 
-        <!-- ================= داشبورد اصلی (کاملاً متمایز و سلطنتی) ================= -->
-        <div class="dashboard-panel" id="mainDashboard">
-            
-            <!-- هدر جدید و شیک -->
-            <div class="luxury-header">
-                <div class="user-profile-widget">
-                    <div class="avatar-ring">
-                        <div class="avatar-inner">👑</div>
-                    </div>
-                    <div class="user-text-info">
-                        <span class="user-title" id="vipUsername">meisamnadiri</span>
-                        <span class="user-status-tag">
-                            <span class="status-dot"></span>
-                            عضو سطح VIP
-                        </span>
-                    </div>
-                </div>
+        <!-- لوگوی کوچک پاریس -->
+        <div class="center-logo"></div
 
-                <div class="digital-wallet">
-                    <span style="font-size: 16px;">💎</span>
-                    <span class="wallet-amount" id="balanceText">۵۰,۰۰۰</span>
-                    <span style="color: #7d6b6e; font-size: 10px; font-weight: 800;">سکه</span>
-                </div>
-            </div>
-
-            <!-- وضعیت زنده تالار بازی -->
-            <div class="online-counter-badge">
-                <span class="status-dot"></span>
-                <span>هم‌اکنون <strong id="onlineCount" style="color: #fff;">۱,۴۸۲</strong> بازیکن حرفه‌ای در حال رقابت هستند</span>
-            </div>
-
-            <!-- گرید دکمه‌های بسیار خلاقانه به جای تمپلت‌های کپی شده قدیمی -->
-            <div class="creative-grid">
-                
-                <div class="luxury-card" onclick="triggerEffect('واریز')">
-                    <div class="card-icon">⚡</div>
-                    <div class="card-title">شارژ سریع</div>
-                    <div class="card-desc">افزایش آنی اعتبار حساب</div>
-                </div>
-
-                <div class="luxury-card" onclick="triggerEffect('برداشت')">
-                    <div class="card-icon">🔑</div>
-                    <div class="card-title">تسویه آنی</div>
-                    <div class="card-desc">برداشت جوایز در کمتر از ۱ ساعت</div>
-                </div>
-
-                <div class="luxury-card" onclick="triggerEffect('گردونه')">
-                    <div class="card-icon">🎡</div>
-                    <div class="card-title">گردونه طلایی</div>
-                    <div class="card-desc">شانس خود را رایگان امتحان کنید</div>
-                </div>
-
-                <div class="luxury-card" onclick="triggerEffect('لیدربورد')">
-                    <div class="card-icon">🏆</div>
-                    <div class="card-title">برترین‌ها</div>
-                    <div class="card-desc">جدول قهرمانان این هفته دبرنا</div>
-                </div>
-
-                <div class="luxury-card" onclick="triggerEffect('قوانین')">
-                    <div class="card-icon">📜</div>
-                    <div class="card-title">راهنمای تالار</div>
-                    <div class="card-desc">چگونه دبرنا بازی کنیم و برنده شویم؟</div>
-                </div>
-
-                <div class="luxury-card" onclick="triggerEffect('پشتیبانی')">
-                    <div class="card-icon">⚜️</div>
-                    <div class="card-title">دستیار VIP</div>
-                    <div class="card-desc">پشتیبانی ۲۴ ساعته مستقیم</div>
-                </div>
-
-            </div>
-
-            <!-- دکمه بزرگ "شروع بازی" با افکت نئونی سه‌بعدی متحرک -->
-            <div class="primary-trigger-area">
-                <div class="glow-button-effect"></div>
-                <button class="btn-launch-game" onclick="startLuxuryGame()">
-                    <span>🎮</span>
-                    <span class="gold-text">ورود به میز رقابت بزرگ</span>
-                </button>
-            </div>
-
+        <!-- منوی دکمه‌های دو ستونه پیکانی -->
+        <div class="menu-grid">
+            <div class="arrow-btn arrow-right">واریز و شارژ</div>
+            <div class="arrow-btn arrow-left">برداشت وجه</div>
+            <div class="arrow-btn arrow-right">گردونه شانس</div>
+            <div class="arrow-btn arrow-left">گزارشات</div>
+            <div class="arrow-btn arrow-right">تماس با ما</div>
+            <div class="arrow-btn arrow-left">قوانین و مقررات</div>
         </div>
 
-    </div>
+        <!-- دکمه بزرگ شروع بازی -->
+        <div class="start-game-container">
+            <div class="laurel-wreath">
+                <div class="leaf"></div>
+                <div class="leaf right"></div>
+            </div>
+            <div class="main-trigger" onclick="alert('در حال اتصال به میز بازی...')">
+                <span>شـروع بـازی</span>
+            </div>
+        </div>
 
-    <script>
-        // ساخت هوشمند ذرات معلق طلایی در پس‌زمینه برای زیبایی فوق‌العاده
-        function createParticles() {
-            const container = document.getElementById('particle-container');
-            const particleCount = 20;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // مقادیر تصادفی برای طبیعی جلوه دادن حرکت ذرات
-                const size = Math.random() * 6 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}vw`;
-                
-                const duration = Math.random() * 8 + 6;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                container.appendChild(particle);
-            }
-        }
-
-        // شبیه‌ساز تعداد کاربران آنلاین پویا
-        setInterval(() => {
-            const counter = document.getElementById('onlineCount');
-            if (counter) {
-                let current = parseInt(counter.innerText.replace(/,/g, ''));
-                current += Math.floor(Math.random() * 11) - 5; // نوسان ملایم
-                counter.innerText = current.toLocaleString('fa-IR');
-            }
-        }, 3000);
-
-        // رفتن به صفحه اصلی با افکت‌های زیبای انتقالی
-        function enterVIPHall() {
-            const usernameInput = document.getElementById('usernameInput');
-            const username = usernameInput.value.trim();
-
-            if (username === "") {
-                alert("ارباب، لطفاً ابتدا یک نام کاربری برای حساب خود بنویسید.");
-                return;
-            }
-
-            // افکت خروج صفحه ورود
-            const authScreen = document.getElementById('authScreen');
-            const mainDashboard = document.getElementById('mainDashboard');
-
-            authScreen.style.opacity = '0';
-            authScreen.style.transform = 'scale(0.9) translateY(-30px)';
-            
-            setTimeout(() => {
-                authScreen.style.display = 'none';
-                
-                // افکت ورود شکوهمند داشبورد اصلی
-                document.getElementById('vipUsername').innerText = username;
-                mainDashboard.style.display = 'flex';
-                
-                // تاخیر کوچک برای اجرای نرم انیمیشن CSS
-                setTimeout(() => {
-                    mainDashboard.style.opacity = '1';
-                    mainDashboard.style.transform = 'scale(1) translateY(0)';
-                }, 50);
-                
-            }, 600);
-        }
-
-        // افکت کلیک کارت‌ها
-        function triggerEffect(actionName) {
-            alert(`بخش مربوط به [${actionName}] به زودی با جدیدترین سیستم پرداخت و وب‌سرویس فعال خواهد شد.`);
-        }
-
-        // عملکرد دکمه بزرگ بازی
-        let currentBalance = 50000;
-        function startLuxuryGame() {
-            if (currentBalance >= 2000) {
-                currentBalance -= 2000;
-                document.getElementById('balanceText').innerText = currentBalance.toLocaleString('fa-IR');
-                alert("به بزرگترین میز دبرنا هدایت می‌شوید... مبلغ ورودی ۲,۰۰۰ سکه کسر شد. موفق باشید ارباب بزرگ!");
-            } else {
-                alert("ارباب گرامی، موجودی سکه شما برای ورود کافی نیست. لطفاً حساب خود را شارژ کنید.");
-            }
-        }
-
-        // اجرای اولیه افکت ذرات پس‌زمینه هنگام لود صفحه
-        window.onload = createParticles;
-    </script>
-</body>
-</html>
+        <!-- تصویر میز دبرنا در پایین 

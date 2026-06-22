@@ -1,0 +1,4 @@
+body { background: #0d0d0d; color: white; font-family: Tahoma; text-align: center; }
+.app-container { max-width: 400px; margin: auto; padding: 20px; }
+.app-header { background: #1a1a1a; padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; }
+.btn-start { background: #6a1b9a; color: white; padding: 20px; width: 100%; border: none; border-radius: 10px; margin-top: 50px; cursor: pointer; }

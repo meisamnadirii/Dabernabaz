@@ -1,59 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>دبرنا باز</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body { font-family: Tahoma, sans-serif; background: #1a1a2e; color: white; text-align: center; margin: 0; padding: 20px; }
-        .header { background: #16213e; padding: 15px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .wallet { font-size: 1.2rem; color: #4ecca3; font-weight: bold; }
-        .room-card { background: #0f3460; margin: 15px 0; padding: 20px; border-radius: 15px; border: 2px solid #e94560; transition: 0.3s; }
-        .room-card:active { transform: scale(0.95); }
-        .room-price { font-size: 1.5rem; display: block; margin-bottom: 10px; }
-        button { background: #e94560; color: white; border: none; padding: 10px 25px; border-radius: 8px; font-size: 1rem; cursor: pointer; }
-        .footer { margin-top: 30px; font-size: 0.8rem; opacity: 0.6; }
-    </style>
+    <title>بازی کسب درآمد</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h2>🎰 دبرنا باز</h2>
-        <div class="wallet">موجودی: <span id="balance">۰</span> تومان</div>
+    <div class="app-container">
+        <header class="app-header">
+            <div>موجودی: <span id="balance">۲,۷۵۰</span> تومان</div>
+            <button onclick="window.location.href='#'">شارژ حساب</button>
+        </header>
+        <main class="game-section">
+            <button class="btn-start" onclick="startGame()">شروع بازی</button>
+        </main>
     </div>
-
-    <h3>انتخاب اتاق بازی</h3>
-    
-    <div class="room-card">
-        <span class="room-price">۵,۰۰۰ تومان</span>
-        <button onclick="buyTicket(5000)">خرید کارت</button>
-    </div>
-
-    <div class="room-card">
-        <span class="room-price">۱۰,۰۰۰ تومان</span>
-        <button onclick="buyTicket(10000)">خرید کارت</button>
-    </div>
-
-    <div class="room-card">
-        <span class="room-price">۱۵,۰۰۰ تومان</span>
-        <button onclick="buyTicket(15000)">خرید کارت</button>
-    </div>
-
-    <div class="footer">طراحی شده برای پلتفرم تلگرام</div>
-
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-
-        function buyTicket(amount) {
-            tg.showConfirm(`آیا از خرید کارت ${amount.toLocaleString()} تومانی اطمینان دارید؟`, (ok) => {
-                if (ok) {
-                    tg.showAlert("در حال اتصال به درگاه پرداخت...");
-                    // در اینجا کد اتصال به سرور شما قرار می‌گیرد
-                }
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
